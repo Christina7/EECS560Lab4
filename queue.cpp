@@ -8,9 +8,9 @@ queue::queue(){
 }
 
 queue::~queue(){
-	node *temp = head;
+	nodeQ *temp = head;
 	while (temp != NULL){
-		node *temp2 = temp->next;
+		nodeQ *temp2 = temp->next;
 		delete temp;
 		temp = temp2;
 	}
@@ -18,24 +18,24 @@ queue::~queue(){
 	temp = NULL;
 }
 
-//adds node to end of queue if it is not already in the queue
-void queue::insert(double x, node *&L){
-	if (L == NULL){	//if current node is NULL adds new node with data
-		L = new node;
+//adds nodeQ to end of queue if it is not already in the queue
+void queue::insert(double x, nodeQ *&L){
+	if (L == NULL){	//if current nodeQ is NULL adds new nodeQ with data
+		L = new nodeQ;
 		L->data = x;
 		L->next = NULL;
 	}
 	else{
-		if (L->data == x){	//if current node is not null and is the number being inserted 
+		if (L->data == x){	//if current nodeQ is not null and is the number being inserted 
 			cout << "Number already in queue \n";
 		}
-		else{	//if current node is not null, last node with data, and not number being inserted, then adds new node with data
+		else{	//if current nodeQ is not null, last nodeQ with data, and not number being inserted, then adds new nodeQ with data
 			if (L->next == NULL){
-				L->next = new node;
+				L->next = new nodeQ;
 				L->next->next = NULL;
 				L->next->data = x;
 			}
-			else{	// current node is not last node and does not contain the number being inserted, then move on to next node recursively
+			else{	// current nodeQ is not last nodeQ and does not contain the number being inserted, then move on to next nodeQ recursively
 				insert(x, L->next);
 			}
 		}
@@ -52,13 +52,13 @@ bool queue::isEmpty(){
 	}
 }
 
-//removes node from queue if there
+//removes nodeQ from queue if there
 void queue::pop(){
 	if (head == NULL){
 		cout << "Number not in queue \n";
 	}
 	else{
-		node *temp = head->next;
+		nodeQ *temp = head->next;
 		delete head;
 		head = temp;
 		
@@ -72,10 +72,10 @@ void queue::peek(){
 		cout << "Empty queue \n";
 	}
 	else{
-		cout << head->data << endl;	//print last node
+		cout << head->data << endl;	//print last nodeQ
 	}
 }
 
-node*& queue::getHead(){
+nodeQ*& queue::getHead(){
 	return head;
 }

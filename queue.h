@@ -4,27 +4,27 @@
 #include <iostream>
 using namespace std;
 
-struct node{
+struct nodeQ{
 	double data;
-	node *next;
+	nodeQ *next;
 };
 
 
 class queue{
 private:
-	node *head;
+	nodeQ *head;
 	bool flag;
 
 public:
 	queue();
 	~queue();
-	void insert(double x, node *&L);
+	void insert(double x, nodeQ *&L);
 	bool isEmpty();
 	void pop();
 	void peek();
-	//node*& find(double x, node *&L);
+	//nodeQ*& find(double x, nodeQ *&L);
 	//void build(ifstream& file);
-	node*& getHead();
+	nodeQ*& getHead();
 };
 
 

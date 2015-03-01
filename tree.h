@@ -4,6 +4,9 @@
 #include <stdlib.h>
 #include <iostream>
 #include <fstream>
+
+#include "queue.h"
+
 using namespace std;
 
 struct node{
@@ -16,13 +19,13 @@ node *rightchd;
 class tree{
 private:
 node *head;
-bool flag;
+//bool flag;
 
 public:
 tree();
 ~tree(); 
 
-void insert(double x); //should insert x in the BST. 
+void insert(double x, node *&L); //should insert x in the BST. 
 
 void remove(double x); //should delete x from the BST. For consistency when removing a data that has two children, use the smallest data in the right subtree of the data that should be removed in order to replace the removed data. 
 
@@ -38,6 +41,7 @@ void inorder(); //should print out all the elements of the BST using inorder tra
 
 void levelorder(); //should print out all the elements of the BST using levelorder traversal.
 
+node*& getHead();
 
 };
 

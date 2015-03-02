@@ -11,7 +11,6 @@ int main(){
 	l.build(fileName);
 
 
-
 	int input;
 	double x;
 
@@ -21,10 +20,12 @@ int main(){
 
 		switch (input) {
 		case 1:
+			cout << "Please insert the number that you want to be inserted in the tree \n";
 			cin >> x;
 			l.insert(x, l.getHead());
 			break;
 		case 2:
+			cout << "Which number do you like to remove from the tree? \n";
 			cin >> x;
 			l.remove(x);
 			break;
@@ -35,19 +36,21 @@ int main(){
 			l.deletemax(l.getHead());
 			break;
 		case 5:
+			cout << "preorder: ";
 			l.preorder(l.getHead());
 			cout << endl;
 			break;
 		case 6:
-			//l.inorder();
+			cout << "inorder: "
+			l.inorder(l.getHead());
 			cout << endl;
 			break;
 		case 7:
-			//l.levelorder();
+			//l.levelorder(l.getHead());
 			cout << endl;
 			break;
 		case 8:
-			//fileName.close();
+			fileName.close();
 			exit(0);
 			break;
 		default:

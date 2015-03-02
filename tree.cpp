@@ -194,7 +194,14 @@ void tree::preorder(node *&L){
 
 
 void tree::inorder(node *&L){
+	if (L == NULL){
 
+	}
+	else{
+		inorder(L->leftchd);
+		cout << L->data << " ";
+		inorder(L->rightchd);
+	}
 }
 
 

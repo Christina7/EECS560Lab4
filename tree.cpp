@@ -47,21 +47,21 @@ void tree::remove(double x){
 		cout << x <<" not in tree \n";
 	}
 	else {
-		if (check->data == x){	//is root
-			if ((check->leftchd == NULL) && (check->rightchd == NULL)){
+		if (check->data == x){	//root is being removed
+			if ((check->leftchd == NULL) && (check->rightchd == NULL)){ //no kids
 				delete check;
 			}
-			else if ((check->leftchd == NULL) && (check->rightchd != NULL)){
+			else if ((check->leftchd == NULL) && (check->rightchd != NULL)){// right kid only
 				temp = check->rightchd;
 				delete check;
 				check = temp;
 			}
-			else if ((check->leftchd != NULL) && (check->rightchd == NULL)){
+			else if ((check->leftchd != NULL) && (check->rightchd == NULL)){ // left kid only
 				temp = check->leftchd;
 				delete check;
 				check = temp;
 			}
-			else if ((check->leftchd != NULL) && (check->rightchd != NULL)){
+			else if ((check->leftchd != NULL) && (check->rightchd != NULL)){ //both kids
 				minSwitch(check);
 			}
 		}

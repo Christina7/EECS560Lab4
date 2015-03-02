@@ -206,7 +206,25 @@ void tree::inorder(node *&L){
 
 
 void tree::levelorder(node *&L){
+	queue q;
+	node * left = L->leftchd;
+	node * right = L->rightchd;
+	if (L == NULL){
 
+	}
+	else{
+		q.insert(L->data, q.getHead());
+		while (!q.isEmpty()){
+			q.peek();
+			q.pop();
+			if (L->leftchd != NULL){
+				q.insert(L->leftchd->data, q.getHead());
+			}
+			if (L->rightchd != NULL){
+				q.insert(L->rightchd->data, q.getHead());
+			}
+		}
+	}
 }
 
 node*& tree::getHead(){

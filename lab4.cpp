@@ -29,19 +29,22 @@ int main(){
 			l.remove(x);
 			break;
 		case 3:
-			//l.deletemin(l.getHead());
+			l.deletemin(l.getHead());
 			break;
 		case 4:
-			//l.deletemax(l.getHead());
+			l.deletemax(l.getHead());
 			break;
 		case 5:
 			l.preorder(l.getHead());
+			cout << endl;
 			break;
 		case 6:
 			//l.inorder();
+			cout << endl;
 			break;
 		case 7:
 			//l.levelorder();
+			cout << endl;
 			break;
 		case 8:
 			//fileName.close();

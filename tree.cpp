@@ -44,55 +44,111 @@ void tree::remove(double x){
 		cout << "Number not in list \n";
 	}
 	else {
-		if ((check->leftchd == NULL) && (check->rightchd == NULL)){
-			delete check;
+		if (check->data == x){
+			if ((check->leftchd == NULL) && (check->rightchd == NULL)){
+				delete check;
+			}
+			else if ((check->leftchd == NULL) && (check->rightchd != NULL)){
+				temp = check->rightchd;
+				delete check;
+				check = temp;
+			}
+			else if ((check->leftchd != NULL) && (check->rightchd == NULL)){
+				temp = check->leftchd;
+				delete check;
+				check = temp;
+			}
+			else if ((check->leftchd != NULL) && (check->rightchd != NULL)){
+				minSwitch(check);
+			}
 		}
-		else if ((check->leftchd == NULL) && (check->rightchd != NULL)){
-			temp = check->rightchd;
-			delete check;
-			check = temp;
+		else{
+			if ((check->leftchd != NULL) && (check->leftchd->data == x)){
+				if ((check->leftchd->leftchd == NULL) && (check->leftchd->rightchd == NULL)){
+					delete check->leftchd;
+					check->leftchd = NULL;
+				}
+				else if ((check->leftchd->leftchd == NULL) && (check->leftchd->rightchd != NULL)){
+					temp = check->leftchd->rightchd;
+					delete check->leftchd;
+					check->leftchd = temp;
+				}
+				else if ((check->leftchd->leftchd != NULL) && (check->leftchd->rightchd == NULL)){
+					temp = check->leftchd->leftchd;
+					delete check->leftchd;
+					check->leftchd = temp;
+				}
+				else if ((check->leftchd->leftchd != NULL) && (check->leftchd->rightchd != NULL)){
+					minSwitch(check->leftchd);
+				}
+			}
+			if ((check->rightchd != NULL) && (check->rightchd->data == x)){
+				if ((check->rightchd->leftchd == NULL) && (check->rightchd->rightchd == NULL)){
+					delete check->rightchd;
+					check->rightchd = NULL;
+				}
+				else if ((check->rightchd->leftchd == NULL) && (check->rightchd->rightchd != NULL)){
+					temp = check->rightchd->rightchd;
+					delete check->rightchd;
+					check->rightchd = temp;
+				}
+				else if ((check->rightchd->leftchd != NULL) && (check->rightchd->rightchd == NULL)){
+					temp = check->rightchd->leftchd;
+					delete check->rightchd;
+					check->rightchd = temp;
+				}
+				else if ((check->rightchd->leftchd != NULL) && (check->rightchd->rightchd != NULL)){
+					minSwitch(check->rightchd);
+				}
+			}
 		}
-		else if ((check->leftchd != NULL) && (check->rightchd == NULL)){
-			temp = check->leftchd;
-			delete check;
-			check = temp;
-		}
-		else if ((check->leftchd != NULL) && (check->rightchd != NULL)){
-			minSwitch(check);
-		}
+
 	}
 }
 
+//method for remove when a node has both children. finds min, grabs data, removes min and sets node to min's data
 void tree::minSwitch( node *&L ){
-	node * temp = L;
+	node * temp = L->rightchd;
 	while (temp->leftchd != NULL){
 		temp = temp->leftchd;
 	}
 	double item = temp->data;
-	delete temp;
+	remove(temp->data);
 	L->data = item;
 }
 
 node*& tree::search(double x, node *&L){
+	if (L == NULL){
+		return L;
+	}
+	else{
 		if (L->data == x){
 			return L;
 		}
 		else{
-			if (L == NULL){
+			if ((L->leftchd != NULL) && (L->leftchd->data == x)){
 				return L;
 			}
-			else{
-				if (L->data > x){
-					search(x, L->leftchd);
+			else {
+				if ((L->rightchd != NULL) && (L->rightchd->data == x)){
+					return L;
 				}
 				else{
-					search(x, L->rightchd);
+					if (L->data > x){
+						search(x, L->leftchd);
+					}
+					else{
+						if (L->data <= x){
+							search(x, L->rightchd);
+						}
+					}
 				}
-
 			}
 		}
-	
+	}
 }
+	
+
 
 
 void tree::deletemin(node *&L){
@@ -131,16 +187,10 @@ void tree::preorder(node *&L){
 	}
 	else{
 		cout << L->data << " ";
-		//if (L->leftchd != NULL){
-			preorder(L->leftchd);
-		//}
-		//else{
-		//	if (L->rightchd != NULL){
-				preorder(L->rightchd);
-			//}
-		}
+		preorder(L->leftchd);
+		preorder(L->rightchd);
 	}
-//}
+}
 
 
 void tree::inorder(node *&L){

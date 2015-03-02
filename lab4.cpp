@@ -41,12 +41,12 @@ int main(){
 			cout << endl;
 			break;
 		case 6:
-			cout << "inorder: "
+			cout << "inorder: ";
 			l.inorder(l.getHead());
 			cout << endl;
 			break;
 		case 7:
-			//l.levelorder(l.getHead());
+			l.levelorder(l.getHead());
 			cout << endl;
 			break;
 		case 8:

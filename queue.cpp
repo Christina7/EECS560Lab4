@@ -19,7 +19,7 @@ queue::~queue(){
 }
 
 //adds nodeQ to end of queue if it is not already in the queue
-void queue::insert(double x, nodeQ *&L){
+void queue::insert(node *&x, nodeQ *&L){
 	if (L == NULL){	//if current nodeQ is NULL adds new nodeQ with data
 		L = new nodeQ;
 		L->data = x;
@@ -55,7 +55,7 @@ bool queue::isEmpty(){
 //removes nodeQ from queue if there
 void queue::pop(){
 	if (head == NULL){
-		cout << "Number not in queue \n";
+		//cout << "Number not in queue \n";
 	}
 	else{
 		nodeQ *temp = head->next;
@@ -67,15 +67,17 @@ void queue::pop(){
 }
 
 //prints current head
-void queue::peek(){
+nodeQ *& queue::peek(){
 	if (head == NULL){
-		cout << "Empty queue \n";
+		 //cout << "Empty queue \n";
+		 return head;
 	}
 	else{
-		cout << head->data << endl;	//print last nodeQ
+		return head;
 	}
 }
 
+//returns head
 nodeQ*& queue::getHead(){
 	return head;
 }

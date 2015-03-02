@@ -3,19 +3,21 @@
 #include "tree.h"
 using namespace std;
 
-
+//constructor
 tree::tree(){
 	head = NULL;
 }
 
+//destructor
 tree::~tree(){
 	while (head != NULL){
 		deletemin(head);
 	}
 }
 
+//adds element to tree if not there
 void tree::insert(double x, node *&L){
-	if (L == NULL){ 
+	if (L == NULL){  //empty tree
 		L = new node;
 		L->data = x;
 		L->leftchd = NULL;
@@ -26,7 +28,7 @@ void tree::insert(double x, node *&L){
 			cout << "Already in tree \n";
 		}
 		else{
-			if (L->data > x){
+			if (L->data > x){	//not null and not in tree
 				insert(x, L->leftchd);
 			}
 			else{
@@ -37,14 +39,15 @@ void tree::insert(double x, node *&L){
 
 }
 
+//remove node from list if there
 void tree::remove(double x){
-	node * check = search(x, head);
+	node * check = search(x, head); //finds node
 	node * temp = check;
-	if (check == NULL){
-		cout << "Number not in list \n";
+	if (check == NULL){ //not in tree
+		cout << x <<" not in tree \n";
 	}
 	else {
-		if (check->data == x){
+		if (check->data == x){	//is root
 			if ((check->leftchd == NULL) && (check->rightchd == NULL)){
 				delete check;
 			}
@@ -63,7 +66,7 @@ void tree::remove(double x){
 			}
 		}
 		else{
-			if ((check->leftchd != NULL) && (check->leftchd->data == x)){
+			if ((check->leftchd != NULL) && (check->leftchd->data == x)){ //is left child checks for children and removes appropriately
 				if ((check->leftchd->leftchd == NULL) && (check->leftchd->rightchd == NULL)){
 					delete check->leftchd;
 					check->leftchd = NULL;
@@ -82,7 +85,7 @@ void tree::remove(double x){
 					minSwitch(check->leftchd);
 				}
 			}
-			if ((check->rightchd != NULL) && (check->rightchd->data == x)){
+			if ((check->rightchd != NULL) && (check->rightchd->data == x)){ //is right child  checks for children and removes appropriately
 				if ((check->rightchd->leftchd == NULL) && (check->rightchd->rightchd == NULL)){
 					delete check->rightchd;
 					check->rightchd = NULL;
@@ -117,6 +120,7 @@ void tree::minSwitch( node *&L ){
 	L->data = item;
 }
 
+//finds node if there returns parent of node unless root
 node*& tree::search(double x, node *&L){
 	if (L == NULL){
 		return L;
@@ -150,7 +154,7 @@ node*& tree::search(double x, node *&L){
 	
 
 
-
+//removes minimum node
 void tree::deletemin(node *&L){
 	if (L == NULL){
 		cout << "Nothing to delete";
@@ -165,7 +169,7 @@ void tree::deletemin(node *&L){
 	}
 }
 
-
+//removes max node
 void tree::deletemax(node *&L){
 	if (L == NULL){
 		cout << "Nothing to delete";
@@ -180,7 +184,7 @@ void tree::deletemax(node *&L){
 	}
 }
 
-
+//lists elements in preorder
 void tree::preorder(node *&L){
 	if (L == NULL){
 
@@ -192,7 +196,7 @@ void tree::preorder(node *&L){
 	}
 }
 
-
+//lists elements in inorder
 void tree::inorder(node *&L){
 	if (L == NULL){
 
@@ -204,33 +208,37 @@ void tree::inorder(node *&L){
 	}
 }
 
-
+//lists elements in levelorder
 void tree::levelorder(node *&L){
 	queue q;
-	node * left = L->leftchd;
-	node * right = L->rightchd;
 	if (L == NULL){
-
+		//cout << "Empty tree";
 	}
 	else{
-		q.insert(L->data, q.getHead());
+		q.insert(L, q.getHead());
+
 		while (!q.isEmpty()){
-			q.peek();
+			cout << q.peek()->data->data << " ";
 			q.pop();
 			if (L->leftchd != NULL){
-				q.insert(L->leftchd->data, q.getHead());
+				q.insert(L->leftchd, q.getHead());
 			}
 			if (L->rightchd != NULL){
-				q.insert(L->rightchd->data, q.getHead());
+				q.insert(L->rightchd, q.getHead());
+			}
+			if (q.peek() != NULL){
+				L = q.peek()->data;
 			}
 		}
 	}
 }
 
+//gets root
 node*& tree::getHead(){
 	return head;
 }
 
+//builds initial tree
 void tree::build(ifstream& file){
 	double item;
 	while (file >> item){//read from file and add each number to head

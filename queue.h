@@ -4,8 +4,17 @@
 #include <iostream>
 using namespace std;
 
-struct nodeQ{
+
+
+struct node{	//may need to put back in tree.h
 	double data;
+	node *leftchd;
+	node *rightchd;
+};
+
+
+struct nodeQ{
+	node *data;
 	nodeQ *next;
 };
 
@@ -18,12 +27,10 @@ private:
 public:
 	queue();
 	~queue();
-	void insert(double x, nodeQ *&L);
+	void insert(node *&x, nodeQ *&L);
 	bool isEmpty();
 	void pop();
-	void peek();
-	//nodeQ*& find(double x, nodeQ *&L);
-	//void build(ifstream& file);
+	nodeQ *& peek();
 	nodeQ*& getHead();
 };
 

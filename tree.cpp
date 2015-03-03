@@ -49,20 +49,20 @@ void tree::remove(double x){
 	else {
 		if (check->data == x){	//root is being removed
 			if ((check->leftchd == NULL) && (check->rightchd == NULL)){ //no kids
-				delete check;
+				delete head;
 			}
 			else if ((check->leftchd == NULL) && (check->rightchd != NULL)){// right kid only
-				temp = check->rightchd;
-				delete check;
-				check = temp;
+				temp = head->rightchd;
+				delete head;
+				head = temp;
 			}
 			else if ((check->leftchd != NULL) && (check->rightchd == NULL)){ // left kid only
-				temp = check->leftchd;
-				delete check;
-				check = temp;
+				temp = head->leftchd;
+				delete head;
+				head = temp;
 			}
 			else if ((check->leftchd != NULL) && (check->rightchd != NULL)){ //both kids
-				minSwitch(check);
+				minSwitch(head);
 			}
 		}
 		else{

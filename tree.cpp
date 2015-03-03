@@ -50,6 +50,7 @@ void tree::remove(double x){
 		if (check->data == x){	//root is being removed
 			if ((check->leftchd == NULL) && (check->rightchd == NULL)){ //no kids
 				delete head;
+				head = NULL;
 			}
 			else if ((check->leftchd == NULL) && (check->rightchd != NULL)){// right kid only
 				temp = head->rightchd;
@@ -157,7 +158,7 @@ node*& tree::search(double x, node *&L){
 //removes minimum node
 void tree::deletemin(node *&L){
 	if (L == NULL){
-		cout << "Nothing to delete";
+		cout << "Nothing to delete \n";
 	}
 	else{
 		if (L->leftchd == NULL){
@@ -172,7 +173,7 @@ void tree::deletemin(node *&L){
 //removes max node
 void tree::deletemax(node *&L){
 	if (L == NULL){
-		cout << "Nothing to delete";
+		cout << "Nothing to delete \n";
 	}
 	else{
 		if (L->rightchd == NULL){
